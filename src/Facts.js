@@ -4,7 +4,7 @@ export default class CatFacts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoaded: true,
+            isLoaded: false,
             error: null,
             items: []
         }
