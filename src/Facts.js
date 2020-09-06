@@ -8,6 +8,7 @@ export default class CatFacts extends Component {
             error: null,
             items: []
         }
+        this.getMoreFacts = this.getMoreFacts.bind(this);
     }
 
     componentDidMount() {
@@ -16,7 +17,23 @@ export default class CatFacts extends Component {
         .then((result) => {
             this.setState({
                 isLoaded: true,
-                items: result.items
+                items: result
+            });
+        }, (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        })
+    }
+
+    getMoreFacts() {
+        fetch("https://cat-fact.herokuapp.com/facts/random?amount=5")
+        .then(response => response.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                items: result
             });
         }, (error) => {
             this.setState({
@@ -57,13 +74,13 @@ export default class CatFacts extends Component {
                     <ul>
                         {
                             items.map((fact) => {
-                                <li key={fact.id}>{fact.text}</li>
+                              return  <li key={fact.id}>{fact.text}</li>
                             })
                         }
                     </ul>
                 </article>
                 <article className="btn">
-                    <button>Get more facts</button>
+                    <button onClick={this.getMoreFacts}>Get more facts</button>
                 </article>
             </section>
         );
