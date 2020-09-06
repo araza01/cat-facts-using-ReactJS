@@ -12,19 +12,7 @@ export default class CatFacts extends Component {
     }
 
     componentDidMount() {
-        fetch("https://cat-fact.herokuapp.com/facts/random?amount=5")
-        .then(response => response.json())
-        .then((result) => {
-            this.setState({
-                isLoaded: true,
-                items: result
-            });
-        }, (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
-        })
+        this.getMoreFacts();
     }
 
     getMoreFacts() {
